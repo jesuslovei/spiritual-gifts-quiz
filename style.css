@@ -1196,3 +1196,13 @@ input:checked + .slider:before {
   color: var(--color-gold);
   margin-top: 4px;
 }
+
+/* Connect Image Header styling */
+.retreat-logo-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}

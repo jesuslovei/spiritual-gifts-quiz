@@ -1,10 +1,11 @@
-const CACHE_NAME = 'gifts-quiz-v3';
+const CACHE_NAME = 'gifts-quiz-v5';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
   './app.js',
   './manifest.json',
+  './2026_connect_retreat.png',
   './icon-192.png',
   './icon-512.png'
 ];
@@ -37,34 +38,25 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch events: respond from cache first, then network fallback
+// Fetch events: Network-First with Cache-Fallback
 self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET' || !event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request)
-      .then(cachedResponse => {
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-        
-        return fetch(event.request).then(networkResponse => {
-          // Check if we received a valid response
-          if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-            return networkResponse;
-          }
-          
-          // Clone the response to store it in cache
+    fetch(event.request)
+      .then(networkResponse => {
+        if (networkResponse && networkResponse.status === 200) {
           const responseToCache = networkResponse.clone();
           caches.open(CACHE_NAME).then(cache => {
-            // Only cache local assets (HTTP or HTTPS)
-            if (event.request.url.startsWith(self.location.origin)) {
-              cache.put(event.request, responseToCache);
-            }
+            cache.put(event.request, responseToCache);
           });
-          
-          return networkResponse;
-        }).catch(() => {
-          // Offline fallback could be defined here
-        });
+        }
+        return networkResponse;
+      })
+      .catch(() => {
+        return caches.match(event.request);
       })
   );
 });

@@ -867,7 +867,7 @@ function bindEvents() {
   });
   if (DOM.lifewayModalStartBtn) DOM.lifewayModalStartBtn.addEventListener("click", () => {
     hideLifewayModal();
-    startQuiz("lifeway");
+    startQuiz("lifeway", LIFEWAY_QUESTIONS);
   });
   
   // Facilitator
@@ -1531,13 +1531,35 @@ function showToast(message) {
 // --- 이미지 저장 / 카톡 공유 ---
 
 async function captureCovenantCard() {
-  const cardEl = DOM.covenantCardArea.querySelector(".covenant-card-inner") || DOM.covenantCardArea;
+  const cardEl = DOM.covenantCardArea.querySelector(".covenant-card") || DOM.covenantCardArea;
   
-  // Temporarily make background opaque for clean capture
-  const originalBg = cardEl.style.background;
-  cardEl.style.background = "#0d0a1a";
+  // Create a wrapper to capture the logo + covenant card together
+  const wrapper = document.createElement("div");
+  wrapper.style.cssText = "position:fixed;left:-9999px;top:0;background:#0d0a1a;padding:20px;border-radius:20px;width:460px;display:flex;flex-direction:column;gap:15px;box-sizing:border-box;";
   
-  const canvas = await html2canvas(cardEl, {
+  // Prepend the Connect Retreat logo at the top
+  const logo = document.querySelector(".retreat-logo-img");
+  if (logo) {
+    const logoClone = logo.cloneNode(true);
+    logoClone.style.display = "block";
+    logoClone.style.width = "100%";
+    logoClone.style.height = "auto";
+    logoClone.style.borderRadius = "12px";
+    logoClone.style.border = "1px solid rgba(255, 255, 255, 0.1)";
+    wrapper.appendChild(logoClone);
+  }
+  
+  const cardClone = cardEl.cloneNode(true);
+  cardClone.style.margin = "0";
+  cardClone.style.background = "#0d0a1a";
+  wrapper.appendChild(cardClone);
+  
+  document.body.appendChild(wrapper);
+  
+  // Brief delay to ensure cloned image resources are ready for capture
+  await new Promise(resolve => setTimeout(resolve, 100));
+  
+  const canvas = await html2canvas(wrapper, {
     backgroundColor: "#0d0a1a",
     scale: 2,           // 2× for Retina quality
     useCORS: true,
@@ -1545,7 +1567,7 @@ async function captureCovenantCard() {
     removeContainer: true
   });
   
-  cardEl.style.background = originalBg;
+  document.body.removeChild(wrapper);
   return canvas;
 }
 
