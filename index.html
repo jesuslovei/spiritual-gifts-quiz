@@ -50,37 +50,57 @@
       </div>
 
       <div class="menu-options">
-        <!-- Lifeway Card -->
-        <div class="menu-card glass-card" id="lifeway-card">
+
+        <!-- 추천 안내 배너 -->
+        <div style="width:100%; padding: 14px 18px; background: linear-gradient(135deg, rgba(251,191,36,0.12), rgba(245,158,11,0.08)); border: 1px solid rgba(251,191,36,0.35); border-radius: 16px; margin-bottom: 4px; box-sizing: border-box;">
+          <p id="quiz-guide-text" style="margin:0; font-size:0.88rem; line-height:1.7; color:#fbbf24; text-align:center;">
+            ✅ <strong>1번 또는 2번</strong> 중 하나를 골라서 시작하세요.<br>
+            <span style="font-size:0.8rem; color:var(--text-muted);">시간이 충분하면 1번(80문항) · 빠르게 하려면 2번(30문항)</span><br>
+            <span style="font-size:0.8rem; color:var(--text-muted);">✅ Choose <strong>Option 1</strong> (full) or <strong>Option 2</strong> (quick)</span>
+          </p>
+        </div>
+
+        <!-- 1. Lifeway Card (추천) -->
+        <div class="menu-card glass-card" id="lifeway-card" style="border-color: rgba(251,191,36,0.4); position: relative;">
+          <div style="position:absolute; top:-10px; right:14px; background:linear-gradient(135deg,#f59e0b,#d97706); color:white; font-size:0.7rem; font-weight:800; padding:3px 10px; border-radius:20px; letter-spacing:0.5px;">⭐ RECOMMENDED</div>
           <div class="menu-icon">🏛️</div>
           <h3 id="lifeway-title">1. 남침례교(Lifeway) 공식 진단</h3>
           <p id="lifeway-desc">전통 신학적 뼈대로 16대 영적 은사를 고찰하는 공식 진단입니다. (총 80문항)</p>
           <button class="action-btn primary" id="lifeway-start-btn" style="margin-top: 20px; width: 100%;">테스트 시작하기</button>
         </div>
 
-        <!-- Fuller/Wagner Card -->
+        <!-- 2. Mini Card (추천 - 빠른 버전) -->
+        <div class="menu-card glass-card" id="mini-card" style="border-color: rgba(251,191,36,0.3); position: relative;">
+          <div style="position:absolute; top:-10px; right:14px; background:linear-gradient(135deg,#10b981,#059669); color:white; font-size:0.7rem; font-weight:800; padding:3px 10px; border-radius:20px; letter-spacing:0.5px;">⚡ QUICK</div>
+          <div class="menu-icon">⚡</div>
+          <h3 id="mini-title">2. 미니 단축 은사 진단</h3>
+          <p id="mini-desc">리트릿 현장에서 핵심 10대 은사만을 간편하고 빠르게 진단하는 숏코스입니다. (총 30문항)</p>
+          <button class="action-btn primary" id="mini-start-btn" style="margin-top: 20px; width: 100%;">테스트 시작하기</button>
+        </div>
+
+        <!-- 구분선 -->
+        <div style="width:100%; display:flex; align-items:center; gap:10px; margin: 4px 0; box-sizing: border-box;">
+          <div style="flex:1; height:1px; background: var(--border-light);"></div>
+          <span id="advanced-divider-text" style="font-size:0.75rem; color:var(--text-muted); white-space:nowrap;">심화 진단 (선택)</span>
+          <div style="flex:1; height:1px; background: var(--border-light);"></div>
+        </div>
+
+        <!-- 3. Fuller/Wagner Card -->
         <div class="menu-card glass-card" id="wagner-card">
           <div class="menu-icon">🕊️</div>
-          <h3 id="wagner-title">2. 풀러/바그너 은사 진단</h3>
+          <h3 id="wagner-title">3. 풀러/바그너 은사 진단</h3>
           <p id="wagner-desc">신비 은사를 포함한 22가지 풍성한 은사를 정교하게 채점하는 피터 바그너식 진단입니다. (총 110문항)</p>
           <button class="action-btn secondary" id="wagner-start-btn" style="margin-top: 20px; width: 100%;">테스트 시작하기</button>
         </div>
 
-        <!-- GiftsTest.com Card -->
+        <!-- 4. GiftsTest.com Card -->
         <div class="menu-card glass-card" id="giftstest-card">
           <div class="menu-icon">🛡️</div>
-          <h3 id="giftstest-title">3. GiftsTest.com 은사 진단</h3>
+          <h3 id="giftstest-title">4. GiftsTest.com 은사 진단</h3>
           <p id="giftstest-desc">은사주의적 sign 은사들을 포함한 22가지 은사를 모듈형으로 다루는 서구식 진단입니다. (총 66문항)</p>
-          <button class="action-btn primary" id="giftstest-start-btn" style="margin-top: 20px; width: 100%;">테스트 시작하기</button>
+          <button class="action-btn secondary" id="giftstest-start-btn" style="margin-top: 20px; width: 100%;">테스트 시작하기</button>
         </div>
 
-        <!-- Mini Card -->
-        <div class="menu-card glass-card" id="mini-card">
-          <div class="menu-icon">⚡</div>
-          <h3 id="mini-title">4. 미니 단축 은사 진단</h3>
-          <p id="mini-desc">리트릿 현장에서 핵심 10대 은사만을 간편하고 빠르게 진단하는 숏코스입니다. (총 30문항)</p>
-          <button class="action-btn secondary" id="mini-start-btn" style="margin-top: 20px; width: 100%;">테스트 시작하기</button>
-        </div>
       </div>
 
       <footer class="home-footer" style="display: flex; flex-direction: column; gap: 10px; align-items: center; width: 100%; margin-top: 30px;">
@@ -197,6 +217,15 @@
 
       <div class="action-group" style="margin-top: 10px; width: 100%;">
         <button class="action-btn primary" id="share-covenant-btn" style="display: none; width: 100%;">🔗 약정서 내용 복사하기</button>
+        
+        <!-- Image export & share buttons -->
+        <button class="action-btn" id="save-image-btn" style="display: none; width: 100%; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none;">
+          📸 이미지로 저장하기 / Save as Image
+        </button>
+        <button class="action-btn" id="share-image-btn" style="display: none; width: 100%; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none;">
+          💬 카톡으로 공유하기 / Share via KakaoTalk
+        </button>
+        
         <button class="action-btn" id="back-to-results-btn" style="width: 100%;">← 결과 화면으로</button>
       </div>
     </section>
@@ -285,6 +314,8 @@
   <!-- Toast Notification Overlay -->
   <div class="toast" id="toast-notification">복사되었습니다!</div>
 
+  <!-- html2canvas: covenant card image export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <!-- Javascript -->
   <script src="app.js"></script>
 </body>

@@ -431,12 +431,14 @@ const TRANSLATIONS = {
     // Cards
     lifeway_title: "1. 남침례교(Lifeway) 공식 진단",
     lifeway_desc: "전통 신학적 뼈대로 16대 영적 은사를 고찰하는 공식 진단입니다. (총 80문항)",
-    wagner_title: "2. 풀러/바그너 은사 진단",
-    wagner_desc: "신비 은사를 포함한 22가지 풍성한 은사를 정교하게 채점하는 피터 바그너식 진단입니다. (총 110문항)",
-    giftstest_title: "3. GiftsTest.com 은사 진단",
-    giftstest_desc: "은사주의적 sign 은사들을 포함한 22가지 은사를 모듈형으로 다루는 서구식 진단입니다. (총 66문항)",
-    mini_title: "4. 미니 단축 은사 진단",
+    mini_title: "2. 미니 단축 은사 진단",
     mini_desc: "리트릿 현장에서 핵심 10대 은사만을 간편하고 빠르게 진단하는 숏코스입니다. (총 30문항)",
+    wagner_title: "3. 풀러/바그너 은사 진단",
+    wagner_desc: "신비 은사를 포함한 22가지 풍성한 은사를 정교하게 채점하는 피터 바그너식 진단입니다. (총 110문항)",
+    giftstest_title: "4. GiftsTest.com 은사 진단",
+    giftstest_desc: "은사주의적 sign 은사들을 포함한 22가지 은사를 모듈형으로 다루는 서구식 진단입니다. (총 66문항)",
+    quiz_guide_text: "✅ <strong>1번 또는 2번</strong> 중 하나를 골라서 시작하세요.<br><span style='font-size:0.8rem'>시간이 충분하면 1번(80문항) · 빠르게 하려면 2번(30문항)</span>",
+    advanced_divider_text: "심화 진단 (선택)",
     
     start_btn: "테스트 시작하기",
     learn_btn: "📘 은사 가이드북 보기",
@@ -546,12 +548,16 @@ const TRANSLATIONS = {
     // Cards
     lifeway_title: "1. Lifeway Spiritual Gifts Assessment",
     lifeway_desc: "The classic denominational assessment tool covering 16 spiritual gifts. (80 Questions)",
-    wagner_title: "2. Wagner-Modified Houts Survey",
+    lifeway_title: "1. Lifeway (SBC) Official Survey",
+    lifeway_desc: "The classic Southern Baptist Convention spiritual gifts survey. Covers 16 core gifts with biblical depth. (80 Questions)",
+    mini_title: "2. Mini / Quick Gifts Survey",
+    mini_desc: "A quick, streamlined survey focusing on the top 10 practical ministry gifts. Perfect for retreat settings. (30 Questions)",
+    wagner_title: "3. Wagner-Modified Houts Survey",
     wagner_desc: "A highly detailed, historical test evaluating 22 gifts including sign gifts. (110 Questions)",
-    giftstest_title: "3. GiftsTest.com Assessment",
+    giftstest_title: "4. GiftsTest.com Assessment",
     giftstest_desc: "A modern, modular assessment classifying 22 spiritual gifts. (66 Questions)",
-    mini_title: "4. Mini/Hybrid Spiritual Gifts Survey",
-    mini_desc: "A quick, streamlined survey focusing on the top 10 practical ministry gifts. (30 Questions)",
+    quiz_guide_text: "✅ Choose <strong>Option 1</strong> or <strong>Option 2</strong> to begin.<br><span style='font-size:0.8rem'>Option 1 = full 80Q · Option 2 = quick 30Q</span>",
+    advanced_divider_text: "Advanced Options (Optional)",
     
     start_btn: "Start Test",
     learn_btn: "📘 View Gift Guidebook",
@@ -707,6 +713,8 @@ const DOM = {
   generateCardBtn: document.getElementById("generate-card-btn"),
   covenantCardArea: document.getElementById("covenant-card-area"),
   shareCovenantBtn: document.getElementById("share-covenant-btn"),
+  saveImageBtn: document.getElementById("save-image-btn"),
+  shareImageBtn: document.getElementById("share-image-btn"),
   backToResultsBtn: document.getElementById("back-to-results-btn"),
   
   // Facilitator Elements
@@ -795,6 +803,8 @@ function bindEvents() {
   
   DOM.generateCardBtn.addEventListener("click", generatePledgeCovenantCard);
   DOM.shareCovenantBtn.addEventListener("click", copyCovenantToClipboard);
+  DOM.saveImageBtn.addEventListener("click", saveCovenantAsImage);
+  DOM.shareImageBtn.addEventListener("click", shareCovenantImage);
   
   // Facilitator
   DOM.facilitatorOpenBtn.addEventListener("click", () => showScreen("facilitator-screen"));
@@ -832,6 +842,12 @@ function translateUI() {
   document.getElementById("mini-title").textContent = dict.mini_title;
   document.getElementById("mini-desc").textContent = dict.mini_desc;
   document.getElementById("mini-start-btn").textContent = dict.start_btn;
+  
+  // Guide banner & divider
+  const guideEl = document.getElementById("quiz-guide-text");
+  if (guideEl) guideEl.innerHTML = dict.quiz_guide_text;
+  const dividerEl = document.getElementById("advanced-divider-text");
+  if (dividerEl) dividerEl.textContent = dict.advanced_divider_text;
   
   DOM.facilitatorOpenBtn.textContent = `⚙️ ${dict.facilitator_title}`;
   document.getElementById("facilitator-explain-text").innerHTML = dict.facilitator_desc;
@@ -1241,6 +1257,9 @@ function setupPledgeScreen() {
   DOM.signatureInput.value = "";
   DOM.covenantCardArea.style.display = "none";
   DOM.shareCovenantBtn.style.display = "none";
+  DOM.saveImageBtn.style.display = "none";
+  DOM.shareImageBtn.style.display = "none";
+
 }
 
 function updateCovenantCardPreview() {
@@ -1324,6 +1343,8 @@ function generatePledgeCovenantCard() {
   
   DOM.covenantCardArea.style.display = "block";
   DOM.shareCovenantBtn.style.display = "block";
+  DOM.saveImageBtn.style.display = "block";
+  DOM.shareImageBtn.style.display = "block";
   updateCovenantCardPreview();
   
   // Scroll to covenant card
@@ -1404,7 +1425,103 @@ function showToast(message) {
   }, 3000);
 }
 
-// --- 7. FACILITATOR COMPILING & GROUP MATCHING ---
+// --- 이미지 저장 / 카톡 공유 ---
+
+async function captureCovenantCard() {
+  const cardEl = DOM.covenantCardArea.querySelector(".covenant-card-inner") || DOM.covenantCardArea;
+  
+  // Temporarily make background opaque for clean capture
+  const originalBg = cardEl.style.background;
+  cardEl.style.background = "#0d0a1a";
+  
+  const canvas = await html2canvas(cardEl, {
+    backgroundColor: "#0d0a1a",
+    scale: 2,           // 2× for Retina quality
+    useCORS: true,
+    logging: false,
+    removeContainer: true
+  });
+  
+  cardEl.style.background = originalBg;
+  return canvas;
+}
+
+async function saveCovenantAsImage() {
+  const btn = DOM.saveImageBtn;
+  const origText = btn.textContent;
+  btn.textContent = currentLanguage === "ko" ? "⏳ 이미지 생성 중..." : "⏳ Generating...";
+  btn.disabled = true;
+  
+  try {
+    const canvas = await captureCovenantCard();
+    const link = document.createElement("a");
+    const name = (DOM.signatureInput.value.trim() || "covenant").replace(/\s+/g, "_");
+    link.download = `은사결단서약_${name}.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+    showToast(currentLanguage === "ko" ? "📸 이미지 저장 완료!" : "📸 Image saved!");
+  } catch (err) {
+    console.error("Image save error:", err);
+    showToast(currentLanguage === "ko" ? "❌ 저장 실패. 다시 시도해 주세요." : "❌ Save failed. Please try again.");
+  } finally {
+    btn.textContent = origText;
+    btn.disabled = false;
+  }
+}
+
+async function shareCovenantImage() {
+  const btn = DOM.shareImageBtn;
+  const origText = btn.textContent;
+  btn.textContent = currentLanguage === "ko" ? "⏳ 공유 준비 중..." : "⏳ Preparing share...";
+  btn.disabled = true;
+  
+  try {
+    const canvas = await captureCovenantCard();
+    
+    // Convert canvas to Blob
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+    const name = (DOM.signatureInput.value.trim() || "covenant").replace(/\s+/g, "_");
+    const file = new File([blob], `은사결단서약_${name}.png`, { type: "image/png" });
+    
+    // Try Web Share API with file (카톡, 인스타 등 네이티브 공유 시트)
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        files: [file],
+        title: currentLanguage === "ko" ? "나의 은사 결단 약정서" : "My Spiritual Gifts Covenant",
+        text: currentLanguage === "ko"
+          ? `✨ ${DOM.signatureInput.value.trim()}의 은사 결단 약정서`
+          : `✨ ${DOM.signatureInput.value.trim()}'s Spiritual Gifts Covenant`
+      });
+    } else if (navigator.share) {
+      // Share without file (text-only fallback)
+      await navigator.share({
+        title: currentLanguage === "ko" ? "나의 은사 결단 약정서" : "My Spiritual Gifts Covenant",
+        text: currentLanguage === "ko"
+          ? `✨ ${DOM.signatureInput.value.trim()}의 은사 결단 약정서\nhttps://jesuslovei.github.io/spiritual-gifts-quiz/`
+          : `✨ ${DOM.signatureInput.value.trim()}'s Spiritual Gifts Covenant\nhttps://jesuslovei.github.io/spiritual-gifts-quiz/`
+      });
+    } else {
+      // Desktop fallback: just download the image
+      const link = document.createElement("a");
+      link.download = `은사결단서약_${name}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+      showToast(currentLanguage === "ko"
+        ? "💾 PC에서는 이미지로 저장됩니다. 카톡에서 직접 공유해 주세요!"
+        : "💾 On desktop, image will be downloaded. Share it via KakaoTalk manually.");
+    }
+  } catch (err) {
+    if (err.name !== "AbortError") {
+      console.error("Share error:", err);
+      showToast(currentLanguage === "ko" ? "❌ 공유 실패. 다시 시도해 주세요." : "❌ Share failed. Please try again.");
+    }
+  } finally {
+    btn.textContent = origText;
+    btn.disabled = false;
+  }
+}
+
+
 
 function parseFacilitatorData() {
   const rawData = DOM.resultsInput.value.trim();
