@@ -662,6 +662,9 @@ let quizQuestions = [];
 let currentQuestionIndex = 0;
 let userAnswers = {}; // Map of index -> score string (e.g., "5", "3" or wagner "3", "2")
 let participants = []; // For facilitator parsing
+let reviewMode = false;       // true = 미응답 문항만 순환 중
+let reviewQueue = [];         // 미응답 문항의 원래 인덱스 배열
+let reviewQueuePos = 0;       // reviewQueue 내 현재 위치
 
 // DOM references
 const DOM = {
@@ -904,6 +907,10 @@ function startQuiz(type, questions) {
   activeQuizType = type;
   quizQuestions = questions;
   currentQuestionIndex = 0;
+  reviewMode = false;
+  reviewQueue = [];
+  reviewQueuePos = 0;
+
   userAnswers = {};
   
   // Update header text bilingually
@@ -982,10 +989,36 @@ function renderQuestion() {
   });
   
   // Nav buttons state
-  DOM.prevBtn.disabled = currentQuestionIndex === 0;
-  DOM.nextBtn.innerHTML = currentQuestionIndex === quizQuestions.length - 1 
-    ? `${dict.submit}` 
-    : `${dict.next} →`;
+  DOM.prevBtn.disabled = (reviewMode ? reviewQueuePos === 0 : currentQuestionIndex === 0);
+  
+  // Show skip banner during review mode
+  const existing = document.getElementById('review-mode-banner');
+  if (reviewMode) {
+    const dict = TRANSLATIONS[currentLanguage];
+    const remaining = reviewQueue.length - reviewQueuePos;
+    const msg = currentLanguage === 'ko'
+      ? `🔄 건너뛴 문항 복습 중 — ${remaining}개 남음`
+      : `🔄 Reviewing skipped questions — ${remaining} left`;
+    if (existing) {
+      existing.textContent = msg;
+    } else {
+      const banner = document.createElement('div');
+      banner.id = 'review-mode-banner';
+      banner.style.cssText = 'background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.4);border-radius:8px;padding:8px 14px;font-size:0.82rem;color:#fbbf24;text-align:center;margin-bottom:10px;';
+      banner.textContent = msg;
+      DOM.questionProgress.parentNode.insertBefore(banner, DOM.questionProgress);
+    }
+  } else if (existing) {
+    existing.remove();
+  }
+  
+  DOM.nextBtn.innerHTML = (() => {
+    const dict = TRANSLATIONS[currentLanguage];
+    if (reviewMode) {
+      return reviewQueuePos === reviewQueue.length - 1 ? dict.submit : `${dict.next} →`;
+    }
+    return currentQuestionIndex === quizQuestions.length - 1 ? dict.submit : `${dict.next} →`;
+  })();
 }
 
 function handleOptionSelect(selectedScore) {
@@ -1013,6 +1046,29 @@ function handleOptionSelect(selectedScore) {
 }
 
 function goToNextQuestion() {
+  if (reviewMode) {
+    if (reviewQueuePos < reviewQueue.length - 1) {
+      reviewQueuePos++;
+      currentQuestionIndex = reviewQueue[reviewQueuePos];
+      renderQuestion();
+    } else {
+      // Done reviewing — check if any still unanswered
+      const stillMissing = reviewQueue.filter(i => userAnswers[i] === undefined);
+      if (stillMissing.length > 0) {
+        // Some still skipped within review — restart review
+        reviewQueue = stillMissing;
+        reviewQueuePos = 0;
+        currentQuestionIndex = reviewQueue[0];
+        renderQuestion();
+      } else {
+        reviewMode = false;
+        reviewQueue = [];
+        showScreen('results-screen');
+        showResults();
+      }
+    }
+    return;
+  }
   if (currentQuestionIndex < quizQuestions.length - 1) {
     currentQuestionIndex++;
     renderQuestion();
@@ -1020,6 +1076,14 @@ function goToNextQuestion() {
 }
 
 function goToPrevQuestion() {
+  if (reviewMode) {
+    if (reviewQueuePos > 0) {
+      reviewQueuePos--;
+      currentQuestionIndex = reviewQueue[reviewQueuePos];
+      renderQuestion();
+    }
+    return;
+  }
   if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
     renderQuestion();
@@ -1027,22 +1091,40 @@ function goToPrevQuestion() {
 }
 
 function submitQuiz() {
-  // Check if all answered
-  const unanswered = [];
+  // Collect unanswered question indices
+  const unansweredIndices = [];
   for (let i = 0; i < quizQuestions.length; i++) {
     if (userAnswers[i] === undefined) {
-      unanswered.push(i + 1);
+      unansweredIndices.push(i);
     }
   }
   
-  if (unanswered.length > 0) {
-    alert(currentLanguage === 'ko' 
-      ? `응답하지 않은 질문이 있습니다: ${unanswered.join(", ")}번` 
-      : `Please answer all questions. Missing: ${unanswered.join(", ")}`);
+  if (unansweredIndices.length > 0) {
+    // Enter review mode — show only unanswered questions
+    reviewMode = true;
+    reviewQueue = unansweredIndices;
+    reviewQueuePos = 0;
+    currentQuestionIndex = reviewQueue[0];
+    
+    // Show a brief toast/notification
+    const dict = TRANSLATIONS[currentLanguage];
+    const msg = currentLanguage === 'ko'
+      ? `✏️ 아직 ${unansweredIndices.length}개의 문항을 응답하지 않았어요. 해당 문항들만 보여드릴게요!`
+      : `✏️ ${unansweredIndices.length} question(s) were skipped. Showing only unanswered questions now!`;
+    
+    // Create toast notification
+    const toast = document.createElement('div');
+    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(30,20,60,0.95);border:1px solid rgba(251,191,36,0.5);color:#fbbf24;padding:12px 24px;border-radius:12px;font-size:0.9rem;z-index:9999;text-align:center;max-width:88vw;box-shadow:0 8px 32px rgba(0,0,0,0.4);';
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3500);
+    
+    renderQuestion();
     return;
   }
   
-  showScreen("results-screen");
+  reviewMode = false;
+  showScreen('results-screen');
   showResults();
 }
 
