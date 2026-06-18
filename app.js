@@ -855,7 +855,12 @@ function bindEvents() {
   DOM.shareImageBtn.addEventListener("click", shareCovenantImage);
 
   // Lifeway Info Modal
-  if (DOM.lifewayLearnBtn) DOM.lifewayLearnBtn.addEventListener("click", showLifewayModal);
+  if (DOM.lifewayLearnBtn) {
+    DOM.lifewayLearnBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showLifewayModal();
+    });
+  }
   if (DOM.lifewayModalClose) DOM.lifewayModalClose.addEventListener("click", hideLifewayModal);
   if (DOM.lifewayInfoModal) DOM.lifewayInfoModal.addEventListener("click", (e) => {
     if (e.target === DOM.lifewayInfoModal) hideLifewayModal();

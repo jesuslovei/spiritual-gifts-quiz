@@ -209,6 +209,8 @@ main {
   height: 4px;
   background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
   opacity: 0.8;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
 }
 
 /* Landing Page (Welcome Screen) Styling */
