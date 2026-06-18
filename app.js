@@ -1487,13 +1487,13 @@ Powered by Connect Retreat Spiritual Gifts Profiler`;
 function showLifewayModal() {
   if (!DOM.lifewayInfoModal) return;
   translateLifewayModal();
-  DOM.lifewayInfoModal.style.display = "block";
+  DOM.lifewayInfoModal.classList.add("active");
   document.body.style.overflow = "hidden";
 }
 
 function hideLifewayModal() {
   if (!DOM.lifewayInfoModal) return;
-  DOM.lifewayInfoModal.style.display = "none";
+  DOM.lifewayInfoModal.classList.remove("active");
   document.body.style.overflow = "";
 }
 
