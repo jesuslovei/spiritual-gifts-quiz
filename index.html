@@ -67,6 +67,7 @@
           <h3 id="lifeway-title">1. 남침례교(Lifeway) 공식 진단</h3>
           <p id="lifeway-desc">전통 신학적 뼈대로 16대 영적 은사를 고찰하는 공식 진단입니다. (총 80문항)</p>
           <button class="action-btn primary" id="lifeway-start-btn" style="margin-top: 20px; width: 100%;">테스트 시작하기</button>
+          <button class="action-btn" id="lifeway-learn-btn" style="margin-top: 10px; width: 100%; font-size: 0.88rem;">📖 영적 은사란? Lifeway 소개</button>
         </div>
 
         <!-- 2. Mini Card (추천 - 빠른 버전) -->
@@ -310,6 +311,68 @@
     </section>
 
   </main>
+
+  <!-- Lifeway 은사 소개 모달 -->
+  <div class="modal-overlay" id="lifeway-info-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; overflow-y:auto; padding: 20px; box-sizing:border-box;">
+    <div style="max-width:560px; margin:auto; background:linear-gradient(135deg,#13102a,#1a1535); border:1px solid rgba(251,191,36,0.3); border-radius:20px; padding:28px 24px; position:relative;">
+      <button id="lifeway-modal-close" style="position:absolute; top:14px; right:16px; background:none; border:none; color:var(--text-muted); font-size:1.6rem; cursor:pointer; line-height:1;">&times;</button>
+      
+      <div style="text-align:center; margin-bottom:20px;">
+        <div style="font-size:2.2rem; margin-bottom:8px;">🏛️</div>
+        <h2 id="lw-modal-title" style="margin:0; font-size:1.3rem; font-weight:800; color:var(--text-bright);">영적 은사란 무엇인가?</h2>
+        <p id="lw-modal-source" style="margin:6px 0 0; font-size:0.75rem; color:var(--text-muted);">출처: Lifeway Christian Resources</p>
+      </div>
+
+      <div style="font-size:0.9rem; line-height:1.75; color:var(--text-main);">
+
+        <div style="background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.25); border-radius:12px; padding:14px 16px; margin-bottom:16px;">
+          <h4 id="lw-section-1" style="margin:0 0 8px; color:#fbbf24; font-size:0.9rem;">📖 성경이 말하는 영적 은사</h4>
+          <ul id="lw-bible-list" style="margin:0; padding-left:18px; color:var(--text-main);">
+            <li>각 신자는 최소 하나의 은사를 받는다. <em style="color:var(--text-muted);">(고전 12:7)</em></li>
+            <li>성령께서 누가 어떤 은사를 받을지 결정하신다. <em style="color:var(--text-muted);">(고전 12:11)</em></li>
+            <li>각 은사는 동등하게 소중하다. <em style="color:var(--text-muted);">(고전 12:21-26)</em></li>
+            <li>은사는 교회의 유익을 위해 사용되어야 한다. <em style="color:var(--text-muted);">(롬 12:6-8; 엡 4:12)</em></li>
+            <li>은사를 사용하는 것은 명령이다. <em style="color:var(--text-muted);">(벧전 4:10)</em></li>
+            <li>은사를 사용함으로 영적으로 성숙해진다. <em style="color:var(--text-muted);">(엡 4:13)</em></li>
+          </ul>
+        </div>
+
+        <div style="background:rgba(99,102,241,0.08); border:1px solid rgba(99,102,241,0.2); border-radius:12px; padding:14px 16px; margin-bottom:16px;">
+          <h4 id="lw-section-2" style="margin:0 0 8px; color:#818cf8; font-size:0.9rem;">🙏 계시를 구하는 기도</h4>
+          <p id="lw-prayer-text" style="margin:0;">하나님은 성령을 통해 우리의 은사를 드러내십니다. 성경에서 은사에 관해 말씀하시는 것을 기도하며 공부하세요. 또한 다른 신자들이 우리의 은사를 확인해주기도 하며, 때로는 은사 진단 도구를 통해 발견되기도 합니다.</p>
+        </div>
+
+        <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); border-radius:12px; padding:14px 16px; margin-bottom:16px;">
+          <h4 id="lw-section-3" style="margin:0 0 8px; color:#34d399; font-size:0.9rem;">⚡ 은사와 사역의 연결</h4>
+          <p id="lw-ministry-text" style="margin:0;">은사가 발견되면, 다음 단계는 그 발견을 행동으로 옮기는 것입니다. 하나님은 우리를 봉사를 통해 은사를 '나누어 주도록' 초대하십니다. 은사와 사역의 기회를 연결하여 실제로 섬기기 시작하세요.</p>
+        </div>
+
+        <div style="background:rgba(139,92,246,0.08); border:1px solid rgba(139,92,246,0.2); border-radius:12px; padding:14px 16px; margin-bottom:20px;">
+          <h4 id="lw-section-4" style="margin:0 0 8px; color:#a78bfa; font-size:0.9rem;">🌱 영적 성장</h4>
+          <p id="lw-growth-text" style="margin:0;">그리스도의 제자로서의 영적 여정은 개인의 죄를 인정하고 그리스도를 구주와 주님으로 신뢰한 순간부터 시작됩니다. 그 시점부터 죽음 또는 그리스도의 재림 때까지, 삶의 부름은 그리스도를 닮아가는 것입니다.</p>
+        </div>
+
+        <div style="border-top:1px solid var(--border-light); padding-top:16px; text-align:center;">
+          <p id="lw-pdf-label" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">📥 Lifeway 공식 PDF 자료:</p>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <a href="https://s7d9.scene7.com/is/content/LifeWayChristianResources/Spiritual%5FGifts%5FAssessmentpdf.pdf" target="_blank" style="padding:10px 16px; background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.3); border-radius:10px; color:#fbbf24; text-decoration:none; font-size:0.85rem; font-weight:600;">
+              📋 Spiritual Gifts Survey (English Original PDF)
+            </a>
+            <a href="https://s7d9.scene7.com/is/content/LifeWayChristianResources/Spiritual-Gifts-List-pdf.pdf" target="_blank" style="padding:10px 16px; background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.3); border-radius:10px; color:#818cf8; text-decoration:none; font-size:0.85rem; font-weight:600;">
+              📖 Spiritual Gifts List &amp; Scripture References
+            </a>
+            <a href="https://s7d9.scene7.com/is/content/LifeWayChristianResources/MemberMinistryProfile-SpiritualGiftspdf.pdf" target="_blank" style="padding:10px 16px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:10px; color:#34d399; text-decoration:none; font-size:0.85rem; font-weight:600;">
+              🛠️ Member Ministry Profile (봉사 사역 적용)
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <button id="lifeway-modal-start-btn" class="action-btn primary" style="width:100%; margin-top:20px; padding:16px; font-size:1rem; font-weight:800;">
+        🏛️ Lifeway 진단 시작하기
+      </button>
+    </div>
+  </div>
 
   <!-- Toast Notification Overlay -->
   <div class="toast" id="toast-notification">복사되었습니다!</div>

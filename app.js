@@ -439,6 +439,27 @@ const TRANSLATIONS = {
     giftstest_desc: "은사주의적 sign 은사들을 포함한 22가지 은사를 모듈형으로 다루는 서구식 진단입니다. (총 66문항)",
     quiz_guide_text: "✅ <strong>1번 또는 2번</strong> 중 하나를 골라서 시작하세요.<br><span style='font-size:0.8rem'>시간이 충분하면 1번(80문항) · 빠르게 하려면 2번(30문항)</span>",
     advanced_divider_text: "심화 진단 (선택)",
+    lifeway_learn_btn: "📖 영적 은사란? Lifeway 소개",
+    // Lifeway 모달 내용
+    lw_modal_title: "영적 은사란 무엇인가?",
+    lw_modal_source: "출처: Lifeway Christian Resources",
+    lw_section_1: "📖 성경이 말하는 영적 은사",
+    lw_bible_list: [
+      "각 신자는 최소 하나의 은사를 받는다. <em>(\uace0\uc804 12:7)</em>",
+      "성령께서 누가 어떤 은사를 받을지 결정하신다. <em>(\uace0\uc804 12:11)</em>",
+      "각 은사는 동등하게 소중하다. <em>(\uace0\uc804 12:21-26)</em>",
+      "은사는 교회의 유익을 위해 사용되어야 한다. <em>(롬 12:6-8; 엡 4:12)</em>",
+      "은사를 사용하는 것은 명령이다. <em>(벧전 4:10)</em>",
+      "은사를 사용함으로 영적으로 성숙해진다. <em>(엡 4:13)</em>"
+    ],
+    lw_section_2: "🙏 계시를 구하는 기도",
+    lw_prayer_text: "하나님은 성령을 통해 우리의 은사를 드러내십니다. 성경에서 은사에 관해 말씀하시는 것을 기도하며 공부하세요. 또한 다른 신자들이 우리의 은사를 확인해주기도 하며, 때로는 은사 진단 도구를 통해 발견되기도 합니다.",
+    lw_section_3: "⚡ 은사와 사역의 연결",
+    lw_ministry_text: "은사가 발견되면, 다음 단계는 그 발견을 행동으로 옮기는 것입니다. 하나님은 우리를 봉사를 통해 은사를 '나누어 주도록' 초대하십니다. 은사와 사역의 기회를 연결하여 실제로 섬기기 시작하세요.",
+    lw_section_4: "🌱 영적 성장",
+    lw_growth_text: "그리스도의 제자로서의 영적 여정은 개인의 죄를 인정하고 그리스도를 구주와 주님으로 신뢰한 순간부터 시작됩니다. 그 시점부터 죽음 또는 그리스도의 재림 때까지, 삶의 부름은 그리스도를 닮아가는 것입니다.",
+    lw_pdf_label: "📥 Lifeway 공식 PDF 자료:",
+    lw_modal_start_btn: "🏛️ Lifeway 진단 시작하기",
     
     start_btn: "테스트 시작하기",
     learn_btn: "📘 은사 가이드북 보기",
@@ -558,6 +579,27 @@ const TRANSLATIONS = {
     giftstest_desc: "A modern, modular assessment classifying 22 spiritual gifts. (66 Questions)",
     quiz_guide_text: "✅ Choose <strong>Option 1</strong> or <strong>Option 2</strong> to begin.<br><span style='font-size:0.8rem'>Option 1 = full 80Q · Option 2 = quick 30Q</span>",
     advanced_divider_text: "Advanced Options (Optional)",
+    lifeway_learn_btn: "📖 What Are Spiritual Gifts? Lifeway Guide",
+    // Lifeway modal content
+    lw_modal_title: "What Are Spiritual Gifts?",
+    lw_modal_source: "Source: Lifeway Christian Resources",
+    lw_section_1: "📖 What the Bible Says About Spiritual Gifts",
+    lw_bible_list: [
+      "Each believer is given at least one gift. <em>(1 Cor 12:7)</em>",
+      "The Holy Spirit determines who receives which gifts. <em>(1 Cor 12:11)</em>",
+      "Each gift is equally valuable. <em>(1 Cor 12:21-26)</em>",
+      "We are to use our gifts to serve others for the benefit of the body. <em>(Rom 12:6-8; Eph 4:12)</em>",
+      "We are commanded to use our gifts. <em>(1 Pet 4:10)</em>",
+      "Exercising our gifts will help us develop spiritual maturity. <em>(Eph 4:13)</em>"
+    ],
+    lw_section_2: "🙏 Pray for Revelation",
+    lw_prayer_text: "God will reveal our gifts through His Holy Spirit. Believers should pray and study what God says about gifts in His Word. We should also remember God uses other believers to affirm our gift. Sometimes God may also use spiritual gift assessment tools to reveal His gifts.",
+    lw_section_3: "⚡ Match Gifts with Ministry Opportunities",
+    lw_ministry_text: "Once gifts are discovered, the next step is to take action on that discovery. God invites us to 'give our spiritual gifts away' through service. Connect your gifts to ministry opportunities and start serving.",
+    lw_section_4: "🌱 Spiritual Growth",
+    lw_growth_text: "Your spiritual journey as a follower of Christ began the moment you admitted personal sin and placed your trust in Christ as Savior and Lord. From that point, until death or the return of Christ, your life's call is to grow in Christlikeness.",
+    lw_pdf_label: "📥 Official Lifeway PDF Resources:",
+    lw_modal_start_btn: "🏛️ Start Lifeway Assessment",
     
     start_btn: "Start Test",
     learn_btn: "📘 View Gift Guidebook",
@@ -716,6 +758,12 @@ const DOM = {
   saveImageBtn: document.getElementById("save-image-btn"),
   shareImageBtn: document.getElementById("share-image-btn"),
   backToResultsBtn: document.getElementById("back-to-results-btn"),
+
+  // Lifeway Info Modal
+  lifewayLearnBtn: document.getElementById("lifeway-learn-btn"),
+  lifewayInfoModal: document.getElementById("lifeway-info-modal"),
+  lifewayModalClose: document.getElementById("lifeway-modal-close"),
+  lifewayModalStartBtn: document.getElementById("lifeway-modal-start-btn"),
   
   // Facilitator Elements
   resultsInput: document.getElementById("results-input"),
@@ -805,6 +853,17 @@ function bindEvents() {
   DOM.shareCovenantBtn.addEventListener("click", copyCovenantToClipboard);
   DOM.saveImageBtn.addEventListener("click", saveCovenantAsImage);
   DOM.shareImageBtn.addEventListener("click", shareCovenantImage);
+
+  // Lifeway Info Modal
+  if (DOM.lifewayLearnBtn) DOM.lifewayLearnBtn.addEventListener("click", showLifewayModal);
+  if (DOM.lifewayModalClose) DOM.lifewayModalClose.addEventListener("click", hideLifewayModal);
+  if (DOM.lifewayInfoModal) DOM.lifewayInfoModal.addEventListener("click", (e) => {
+    if (e.target === DOM.lifewayInfoModal) hideLifewayModal();
+  });
+  if (DOM.lifewayModalStartBtn) DOM.lifewayModalStartBtn.addEventListener("click", () => {
+    hideLifewayModal();
+    startQuiz("lifeway");
+  });
   
   // Facilitator
   DOM.facilitatorOpenBtn.addEventListener("click", () => showScreen("facilitator-screen"));
@@ -848,6 +907,8 @@ function translateUI() {
   if (guideEl) guideEl.innerHTML = dict.quiz_guide_text;
   const dividerEl = document.getElementById("advanced-divider-text");
   if (dividerEl) dividerEl.textContent = dict.advanced_divider_text;
+  if (DOM.lifewayLearnBtn) DOM.lifewayLearnBtn.textContent = dict.lifeway_learn_btn;
+  translateLifewayModal();
   
   DOM.facilitatorOpenBtn.textContent = `⚙️ ${dict.facilitator_title}`;
   document.getElementById("facilitator-explain-text").innerHTML = dict.facilitator_desc;
@@ -1416,7 +1477,44 @@ Powered by Connect Retreat Spiritual Gifts Profiler`;
     });
 }
 
+// --- Lifeway Info Modal ---
+
+function showLifewayModal() {
+  if (!DOM.lifewayInfoModal) return;
+  translateLifewayModal();
+  DOM.lifewayInfoModal.style.display = "block";
+  document.body.style.overflow = "hidden";
+}
+
+function hideLifewayModal() {
+  if (!DOM.lifewayInfoModal) return;
+  DOM.lifewayInfoModal.style.display = "none";
+  document.body.style.overflow = "";
+}
+
+function translateLifewayModal() {
+  const dict = TRANSLATIONS[currentLanguage];
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val; };
+  set("lw-modal-title",  dict.lw_modal_title);
+  set("lw-modal-source", dict.lw_modal_source);
+  set("lw-section-1",    dict.lw_section_1);
+  set("lw-section-2",    dict.lw_section_2);
+  set("lw-section-3",    dict.lw_section_3);
+  set("lw-section-4",    dict.lw_section_4);
+  set("lw-prayer-text",  dict.lw_prayer_text);
+  set("lw-ministry-text",dict.lw_ministry_text);
+  set("lw-growth-text",  dict.lw_growth_text);
+  set("lw-pdf-label",    dict.lw_pdf_label);
+  if (DOM.lifewayModalStartBtn) DOM.lifewayModalStartBtn.textContent = dict.lw_modal_start_btn;
+  // Bible list
+  const listEl = document.getElementById("lw-bible-list");
+  if (listEl && dict.lw_bible_list) {
+    listEl.innerHTML = dict.lw_bible_list.map(item => `<li>${item}</li>`).join("");
+  }
+}
+
 function showToast(message) {
+
   DOM.toast.textContent = message;
   DOM.toast.classList.add("show");
   
