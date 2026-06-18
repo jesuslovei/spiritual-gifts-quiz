@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- Ensure proper scaling on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>은사발견 프로파일러 | Spiritual Gifts Profiler</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="A bilingual spiritual gifts profiler for the Connect Retreat. Discover your gifts and pledge your commitment.">
+  <meta name="theme-color" content="#080512">
+  
+  <!-- Mobile Web App Capability (iOS/Android PWA) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="GiftsProfiler">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header>
+    <div class="logo-container" id="logo-container">
+      <span class="logo-text" id="app-title">은사발견 프로파일러</span>
+      <span class="retreat-badge" id="app-subtitle">Spiritual Gifts Profiler</span>
+    </div>
+    <div class="controls-group">
+      <button class="home-icon-btn" id="home-icon-btn" style="display: none;" title="Go Home">🏠</button>
+      <button class="lang-btn" id="lang-toggle-btn">🌐 English</button>
+    </div>
+  </header>
+
+  <!-- Main Viewport Container -->
+  <main>
+    
+    <!-- 1. Welcome / Home Screen -->
+    <section class="screen active" id="home-screen">
+      <div class="hero-section">
+        <div class="hero-icon" style="font-size: 3.5rem; margin-bottom: 15px;">✦</div>
+        <h1 class="hero-title" id="welcome-heading">은사발견 프로파일러</h1>
+        <p class="hero-subtitle" id="intro-text">
+          하나님께서 여러분에게 부어주신 영적 은사들을 발견하고, 그 은사를 가지고 공동체를 어떻게 사랑으로 섬길 수 있는지 고찰하고 기쁜 마음으로 결단해 보세요.
+        </p>
+      </div>
+
+      <div class="menu-options">
+        <!-- Lifeway Card -->
+        <div class="menu-card glass-card" id="lifeway-card">
+          <div class="menu-icon">🏛️</div>
+          <h3 id="lifeway-title">1. 남침례교(Lifeway) 공식 진단</h3>
+          <p id="lifeway-desc">전통 신학적 뼈대로 16대 영적 은사를 고찰하는 공식 진단입니다. (총 80문항)</p>
+          <button class="action-btn primary" id="lifeway-start-btn" style="margin-top: 20px; width: 100%;">테스트 시작하기</button>
+        </div>
+
+        <!-- Fuller/Wagner Card -->
+        <div class="menu-card glass-card" id="wagner-card">
+          <div class="menu-icon">🕊️</div>
+          <h3 id="wagner-title">2. 풀러/바그너 은사 진단</h3>
+          <p id="wagner-desc">신비 은사를 포함한 22가지 풍성한 은사를 정교하게 채점하는 피터 바그너식 진단입니다. (총 110문항)</p>
+          <button class="action-btn secondary" id="wagner-start-btn" style="margin-top: 20px; width: 100%;">테스트 시작하기</button>
+        </div>
+
+        <!-- GiftsTest.com Card -->
+        <div class="menu-card glass-card" id="giftstest-card">
+          <div class="menu-icon">🛡️</div>
+          <h3 id="giftstest-title">3. GiftsTest.com 은사 진단</h3>
+          <p id="giftstest-desc">은사주의적 sign 은사들을 포함한 22가지 은사를 모듈형으로 다루는 서구식 진단입니다. (총 66문항)</p>
+          <button class="action-btn primary" id="giftstest-start-btn" style="margin-top: 20px; width: 100%;">테스트 시작하기</button>
+        </div>
+
+        <!-- Mini Card -->
+        <div class="menu-card glass-card" id="mini-card">
+          <div class="menu-icon">⚡</div>
+          <h3 id="mini-title">4. 미니 단축 은사 진단</h3>
+          <p id="mini-desc">리트릿 현장에서 핵심 10대 은사만을 간편하고 빠르게 진단하는 숏코스입니다. (총 30문항)</p>
+          <button class="action-btn secondary" id="mini-start-btn" style="margin-top: 20px; width: 100%;">테스트 시작하기</button>
+        </div>
+      </div>
+
+      <footer class="home-footer" style="display: flex; flex-direction: column; gap: 10px; align-items: center; width: 100%; margin-top: 30px;">
+        <!-- Facilitator Tool Trigger Card -->
+        <div style="width: 100%; margin-top: 15px; padding: 20px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(99, 102, 241, 0.15)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 20px; text-align: center; box-sizing: border-box;">
+          <button id="facilitator-open-btn" style="width: 100%; padding: 16px 24px; font-size: 1.15rem; font-weight: 800; background: linear-gradient(135deg, #8b5cf6, #6366f1); color: white; border: none; border-radius: 12px; cursor: pointer; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.25);">
+            ⚙️ 인도자용 도구 (소그룹 조 편성)
+          </button>
+          <p id="facilitator-explain-text" style="margin: 12px 0 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+            조원들의 결과를 붙여넣기하면 자동으로 소그룹을 편성합니다.<br>
+            골고루 섞기 / 비슷한 성향끼리 선택 가능
+          </p>
+        </div>
+      </footer>
+    </section>
+
+    <!-- 2. Quiz Interface Screen -->
+    <section class="screen" id="quiz-screen">
+      <div class="glass-card">
+        <div class="quiz-header">
+          <div class="quiz-meta">
+            <span id="quiz-type-title">은사 발견 진단</span>
+            <span id="question-progress">질문 1 / 30</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="quiz-body">
+          <div class="options-container" id="options-container">
+            <!-- Dynamic question title & Likert option buttons rendered by JS -->
+          </div>
+        </div>
+
+        <div class="quiz-footer">
+          <button class="nav-btn" id="prev-btn">← 이전</button>
+          <button class="nav-btn" id="next-btn">다음 →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Results Screen -->
+    <section class="screen" id="results-screen">
+      <div class="glass-card dominant-card" id="dominant-card">
+        <div class="results-header">
+          <h2 id="results-heading">진단 결과</h2>
+          <span class="dominant-badge" id="dominant-badge">나의 가장 강한 대표 은사</span>
+          <h1 class="dominant-name" id="dominant-name">목양 (Shepherding)</h1>
+        </div>
+        <p class="dominant-description" id="dominant-description">
+          은사 설명이 여기에 로드됩니다.
+        </p>
+      </div>
+
+      <div class="glass-card">
+        <h3 id="score-breakdown-heading" style="margin-bottom: 20px; font-size: 1.15rem; font-weight: 700; color: var(--text-bright);">은사별 세부 점수 분포</h3>
+        <div class="chart-bar-container" id="chart-container">
+          <!-- Dynamic progress bars inserted here -->
+        </div>
+      </div>
+
+      <div class="action-group">
+        <button class="action-btn primary" id="pledge-entry-btn">📜 은사로 결단 및 헌신하기</button>
+        <button class="action-btn" id="retake-btn">🔄 다른 테스트 하기</button>
+      </div>
+    </section>
+
+    <!-- 4. Pledge & Covenant Screen -->
+    <section class="screen" id="pledge-screen">
+      <div class="glass-card">
+        <h2 class="info-title" id="pledge-title-main">은사 결단 및 약정서</h2>
+        <p id="pledge-intro-desc" style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 25px;">
+          발견한 은사를 토대로, 우리 공동체의 어느 영역에서 구체적인 섬김을 시작할지 기도하며 서명해 보세요.
+        </p>
+        
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label id="name-input-label" for="signature-input" style="display: block; font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; color: var(--text-bright);">서명할 실명 입력:</label>
+          <input type="text" id="signature-input" placeholder="여기에 이름을 입력하세요 (예: 홍길동)" style="width: 100%; padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-light); background: rgba(255,255,255,0.05); color: var(--text-main); font-size: 1rem; box-sizing: border-box; outline: none;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label id="ministry-heading-label" style="display: block; font-weight: 700; margin-bottom: 12px; font-size: 0.95rem; color: var(--text-bright);">헌신할 봉사 사역 분야 선택 (중복 가능):</label>
+          <div id="ministry-checkbox-container" style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- Dynamically populated checkboxes by JS -->
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 25px;">
+          <label id="pledge-statement-label" style="display: block; font-weight: 700; margin-bottom: 12px; font-size: 0.95rem; color: var(--text-bright);">약정서 서약 내용 선택:</label>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; gap: 10px; align-items: flex-start;">
+              <input type="radio" id="pledge-opt-1" name="pledge_option" value="1" checked style="margin-top: 3px;">
+              <label id="pledge-option-1-label" for="pledge-opt-1" style="font-size: 0.9rem; line-height: 1.4; color: var(--text-main); cursor: pointer;">
+                하나님께서 내게 주신 은사를 사용하여 교회를 세우고 이 공동체를 사랑으로 섬길 것을 결단합니다.
+              </label>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: flex-start;">
+              <input type="radio" id="pledge-opt-2" name="pledge_option" value="2" style="margin-top: 3px;">
+              <label id="pledge-option-2-label" for="pledge-opt-2" style="font-size: 0.9rem; line-height: 1.4; color: var(--text-main); cursor: pointer;">
+                받은 은사를 묻어두지 않고, 공동체의 연약한 지체들을 돌보고 세우는 일에 지혜롭고 충성되게 사용하겠습니다.
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button class="action-btn primary" id="generate-card-btn" style="width: 100%; padding: 16px;">✨ 결단 약정서 카드 발행하기</button>
+      </div>
+
+      <!-- Generated Covenant Card preview block -->
+      <div id="covenant-card-area" style="display: none; width: 100%;">
+        <!-- Renders a beautifully styled parchment-like card -->
+      </div>
+
+      <div class="action-group" style="margin-top: 10px; width: 100%;">
+        <button class="action-btn primary" id="share-covenant-btn" style="display: none; width: 100%;">🔗 약정서 내용 복사하기</button>
+        <button class="action-btn" id="back-to-results-btn" style="width: 100%;">← 결과 화면으로</button>
+      </div>
+    </section>
+
+    <!-- 5. Facilitator Screen -->
+    <section class="screen" id="facilitator-screen">
+      <div class="glass-card">
+        <h2 class="info-title" id="facilitator-heading-title">⚙️ 인도자용 도구</h2>
+        <p class="facilitator-intro" id="facilitator-intro-guide" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+          조원들의 결과 텍스트들을 모아서 분석하고 자동으로 소그룹 조를 편성합니다.
+        </p>
+        
+        <!-- Facilitator Guide Block -->
+        <div style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+          <h4 id="facilitator-guide-header" style="margin: 0 0 12px; font-size: 1rem; color: var(--color-primary);">📖 인도자 가이드</h4>
+          <div id="facilitator-guide-steps" style="font-size: 0.85rem; color: var(--text-main); line-height: 1.7;">
+            <!-- Loaded dynamically by JS -->
+          </div>
+        </div>
+
+        <textarea id="results-input" placeholder="조원들이 공유한 결과 메시지들을 여기에 모두 붙여넣으세요..." style="width: 100%; height: 150px; padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-light); background: rgba(255,255,255,0.02); color: var(--text-main); font-family: inherit; font-size: 0.95rem; box-sizing: border-box; resize: vertical; outline: none;"></textarea>
+        <button class="action-btn primary" id="parse-results-btn" style="margin-top: 15px; width: 100%; padding: 18px; font-size: 1.1rem; font-weight: 800; background: linear-gradient(135deg, #8b5cf6, #6366f1); border: none; border-radius: 12px; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.25);">📋 결과 가져오기 및 분석</button>
+      </div>
+
+      <!-- Members Stats Section -->
+      <div class="glass-card" id="members-list-card" style="display: none; margin-top: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3 id="member-table-title" style="margin: 0; font-size: 1.15rem;">참가자 은사 현황</h3>
+          <span class="member-count-badge" id="member-count-badge" style="background: var(--color-primary); color: var(--text-bright); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">총 0명</span>
+        </div>
+        
+        <div style="overflow-x: auto; width: 100%;">
+          <table id="members-table" style="width: 100%; border-collapse: collapse; margin-bottom: 15px; min-width: 450px;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--border-light);">
+                <th id="th-name" style="text-align: left; padding: 10px; font-size: 0.85rem; color: var(--text-muted);">이름</th>
+                <th id="th-quiz" style="text-align: left; padding: 10px; font-size: 0.85rem; color: var(--text-muted);">진단 유형</th>
+                <th id="th-gifts" style="text-align: left; padding: 10px; font-size: 0.85rem; color: var(--text-muted);">주요 은사 점수</th>
+              </tr>
+            </thead>
+            <tbody id="members-table-body">
+              <!-- Rows loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- Group Allocation Configuration -->
+        <div style="margin-top: 25px; border-top: 1px solid var(--border-light); padding-top: 20px;">
+          <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+            <label for="group-count" id="group-count-label" style="font-weight: 700; font-size: 0.95rem;">편성할 조 개수:</label>
+            <input type="number" id="group-count" min="1" max="20" value="3" style="width: 70px; padding: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); background: rgba(255,255,255,0.05); color: var(--text-main); font-weight: 700; text-align: center; outline: none;">
+          </div>
+          
+          <div style="margin-top: 15px; margin-bottom: 15px;">
+            <span id="match-criteria-label" style="display: block; font-weight: 700; margin-bottom: 10px; font-size: 0.95rem;">조 편성 방식:</span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <input type="radio" id="crit-diverse" name="criteria" value="diverse" checked>
+              <label for="crit-diverse" id="criteria-diverse-label" style="font-size: 0.9rem; color: var(--text-main); cursor: pointer;">은사가 골고루 섞이게 편성 (추천)</label>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
+              <input type="radio" id="crit-similar" name="criteria" value="similar">
+              <label for="crit-similar" id="criteria-similar-label" style="font-size: 0.9rem; color: var(--text-main); cursor: pointer;">비슷한 은사끼리 묶어서 편성</label>
+            </div>
+          </div>
+          
+          <button class="action-btn" id="generate-groups-btn" style="margin-top: 20px; width: 100%; padding: 18px; font-size: 1.1rem; font-weight: 800; background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%); color: white; border: none; border-radius: 12px; box-shadow: 0 4px 15px rgba(139,92,246,0.3); letter-spacing: 0.5px;">✨ 소그룹 조 편성 실행</button>
+        </div>
+      </div>
+
+      <!-- Allocation Results Section -->
+      <div class="glass-card" id="groups-result-card" style="display: none; margin-top: 20px;">
+        <h3 id="groups-result-title" style="margin-top: 0; margin-bottom: 15px; font-size: 1.15rem;">소그룹 편성 결과</h3>
+        <div class="groups-container" id="groups-container" style="display: grid; grid-template-columns: 1fr; gap: 15px;">
+          <!-- Team lists generated dynamically -->
+        </div>
+        <button class="action-btn primary" id="copy-groups-btn" style="margin-top: 20px; width: 100%;">조 편성 결과 복사</button>
+      </div>
+
+      <button class="action-btn" id="facilitator-back-btn" style="width: 100%; margin-top: 20px; padding: 16px; font-size: 1rem; font-weight: 700;">
+        홈으로 돌아가기
+      </button>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification Overlay -->
+  <div class="toast" id="toast-notification">복사되었습니다!</div>
+
+  <!-- Javascript -->
+  <script src="app.js"></script>
+</body>
+</html>

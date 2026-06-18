@@ -1,0 +1,22 @@
+{
+  "name": "Connect Retreat Spiritual Gifts Profiler",
+  "short_name": "GiftsProfiler",
+  "description": "Bilingual spiritual gifts assessment app. Discover your God-given spiritual gifts.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f0e17",
+  "theme_color": "#1e1b4b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
