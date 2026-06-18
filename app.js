@@ -336,7 +336,90 @@ const MINI_QUESTIONS = [
   { id: 30, gift: "Faith", text: { en: "I have deep confidence that God will fulfill His word and make a way even when no path is visible.", ko: "나는 길이 보이지 않을 때에도 하나님께서 그분의 말씀을 성취하시고 마침내 인도하실 것이라는 강한 확신이 있다." } }
 ];
 
-// --- 2. LOCALIZATION TRANSLATIONS ---
+// --- 2. GIFT NAME LOOKUP TABLE (Bilingual) ---
+
+const GIFT_NAMES = {
+  Lifeway: {
+    "Leadership":    { ko: "리더십",      en: "Leadership" },
+    "Administration":{ ko: "행정",        en: "Administration" },
+    "Teaching":      { ko: "가르침",      en: "Teaching" },
+    "Knowledge":     { ko: "지식",        en: "Knowledge" },
+    "Wisdom":        { ko: "지혜",        en: "Wisdom" },
+    "Prophecy":      { ko: "예언",        en: "Prophecy" },
+    "Discernment":   { ko: "영분별",      en: "Discernment" },
+    "Exhortation":   { ko: "격려/권면",   en: "Exhortation" },
+    "Shepherding":   { ko: "목양",        en: "Shepherding" },
+    "Faith":         { ko: "믿음",        en: "Faith" },
+    "Evangelism":    { ko: "전도",        en: "Evangelism" },
+    "Apostleship":   { ko: "사도직",      en: "Apostleship" },
+    "Service/Helps": { ko: "봉사/돕는 일",en: "Service/Helps" },
+    "Mercy":         { ko: "긍휼",        en: "Mercy" },
+    "Giving":        { ko: "구제",        en: "Giving" },
+    "Hospitality":   { ko: "환대",        en: "Hospitality" }
+  },
+  Wagner: {
+    "Prophecy":               { ko: "예언",          en: "Prophecy" },
+    "Pastor":                 { ko: "목양",          en: "Pastor/Shepherding" },
+    "Teaching":               { ko: "가르침",        en: "Teaching" },
+    "Wisdom":                 { ko: "지혜",          en: "Wisdom" },
+    "Knowledge":              { ko: "지식",          en: "Knowledge" },
+    "Exhortation":            { ko: "격려",          en: "Exhortation" },
+    "Discernment":            { ko: "영분별",        en: "Discernment" },
+    "Giving":                 { ko: "구제",          en: "Giving" },
+    "Helps":                  { ko: "돕는 일",       en: "Helps" },
+    "Mercy":                  { ko: "긍휼",          en: "Mercy" },
+    "Missionary":             { ko: "선교사",        en: "Missionary" },
+    "Evangelist":             { ko: "전도자",        en: "Evangelist" },
+    "Hospitality":            { ko: "환대",          en: "Hospitality" },
+    "Faith":                  { ko: "믿음",          en: "Faith" },
+    "Leadership":             { ko: "리더십",        en: "Leadership" },
+    "Administration":         { ko: "행정",          en: "Administration" },
+    "Miracles":               { ko: "기적",          en: "Miracles" },
+    "Healing":                { ko: "신유",          en: "Healing" },
+    "Tongues":                { ko: "방언",          en: "Tongues" },
+    "Interpretation of Tongues":{ ko: "방언통역",    en: "Interpretation of Tongues" },
+    "Intercession":           { ko: "중보기도",      en: "Intercession" },
+    "Service":                { ko: "봉사",          en: "Service" }
+  },
+  GiftsTest: {
+    "Administration":         { ko: "행정",          en: "Administration" },
+    "Apostleship":            { ko: "사도직",        en: "Apostleship" },
+    "Craftsmanship":          { ko: "예술/장인",     en: "Craftsmanship" },
+    "Discernment":            { ko: "영분별",        en: "Discernment" },
+    "Evangelism":             { ko: "전도",          en: "Evangelism" },
+    "Exhortation":            { ko: "격려",          en: "Exhortation" },
+    "Faith":                  { ko: "믿음",          en: "Faith" },
+    "Giving":                 { ko: "구제",          en: "Giving" },
+    "Healing":                { ko: "치유",          en: "Healing" },
+    "Hospitality":            { ko: "환대",          en: "Hospitality" },
+    "Intercession":           { ko: "중보기도",      en: "Intercession" },
+    "Knowledge":              { ko: "지식",          en: "Knowledge" },
+    "Leadership":             { ko: "리더십",        en: "Leadership" },
+    "Mercy":                  { ko: "긍휼",          en: "Mercy" },
+    "Miracles":               { ko: "기적",          en: "Miracles" },
+    "Prophecy":               { ko: "예언",          en: "Prophecy" },
+    "Shepherding":            { ko: "목양",          en: "Shepherding" },
+    "Serving":                { ko: "섬김",          en: "Serving" },
+    "Teaching":               { ko: "가르침",        en: "Teaching" },
+    "Tongues":                { ko: "방언",          en: "Tongues" },
+    "Interpretation of Tongues":{ ko: "방언통역",    en: "Interpretation of Tongues" },
+    "Wisdom":                 { ko: "지혜",          en: "Wisdom" }
+  },
+  Mini: {
+    "Shepherding":   { ko: "목양",        en: "Shepherding" },
+    "Teaching":      { ko: "가르침",      en: "Teaching" },
+    "Evangelism":    { ko: "전도",        en: "Evangelism" },
+    "Serving":       { ko: "섬김",        en: "Serving" },
+    "Administration":{ ko: "행정",        en: "Administration" },
+    "Giving":        { ko: "구제/헌신",   en: "Giving" },
+    "Mercy":         { ko: "긍휼",        en: "Mercy" },
+    "Exhortation":   { ko: "격려",        en: "Exhortation" },
+    "Hospitality":   { ko: "환대",        en: "Hospitality" },
+    "Faith":         { ko: "믿음",        en: "Faith" }
+  }
+};
+
+// --- 3. LOCALIZATION TRANSLATIONS ---
 
 const TRANSLATIONS = {
   ko: {
@@ -537,36 +620,36 @@ const TRANSLATIONS = {
     copy_groups_btn: "📋 Copy Team Allocations",
     back_to_home: "Back to Home",
     
-    // Gift Descriptions (English)
+    // Gift Descriptions (English) - Official Lifeway definitions
     gift_desc: {
-      "Leadership": "The ability to set goals, cast vision, and motivate others to work together harmoniously to accomplish them.",
-      "Administration": "The ability to organize, coordinate, schedule, and direct resources and people efficiently to execute tasks.",
-      "Teaching": "The ability to analyze, explain, and communicate biblical truth clearly so that others understand and apply it.",
-      "Knowledge": "The ability to discover, research, and organize deep biblical insights and scriptural facts.",
-      "Wisdom": "The ability to understand God's perspective on situations and offer practical, helper solutions to complex problems.",
-      "Prophecy": "The ability to declare God's warning, truth, and messages boldly and uncompromisingly to confront sin or edify the church.",
-      "Discernment": "The ability to perceive and distinguish whether a spirit, message, or motivation is from God, human, or evil origins.",
-      "Exhortation": "The ability to counsel, encourage, comfort, and motivate others to step out in faith and grow spiritually.",
-      "Shepherding": "The ability to take long-term responsibility for the spiritual well-being, nurture, and guidance of a group of believers.",
-      "Pastor": "The ability to take long-term responsibility for the spiritual well-being, nurture, and guidance of a group of believers.",
-      "Faith": "The ability to trust God completely for things unseen and move forward boldly under His promises despite all obstacles.",
-      "Evangelism": "The ability to share the Gospel of Christ with unbelievers in an effective, welcoming way that draws them to salvation.",
-      "Evangelist": "The ability to share the Gospel of Christ with unbelievers in an effective, welcoming way that draws them to salvation.",
-      "Apostleship": "The ability to pioneer new ministries, plant churches, and oversee spiritual works across borders or cultures.",
-      "Missionary": "The ability to pioneer new ministries, plant churches, and oversee spiritual works across borders or cultures.",
-      "Service/Helps": "The ability to work behind the scenes performing practical tasks to support and relieve other leaders' ministry responsibilities.",
-      "Helps": "The ability to assist other believers in their tasks, relieving them of practical burdens to maximize team success.",
-      "Service": "The ability to perform practical, physical tasks around the church family, meeting physical needs with joy.",
-      "Serving": "The ability to identify unmet practical needs and work quietly behind the scenes to complete tasks.",
-      "Mercy": "The ability to feel deep compassion and cheerfulness in comforting and helping those who are suffering, sick, or marginalized.",
-      "Giving": "The ability to earn, manage, and contribute financial and material resources generously and quietly beyond the basic tithe.",
-      "Hospitality": "The ability to open one's home and heart to guests, making strangers feel accepted, welcomed, and comfortable.",
-      "Miracles": "The ability to serve as a channel for God to perform supernatural events that demonstrate His power and glory.",
-      "Healing": "The ability to serve as an instrument for God to restore physical, mental, or emotional health to the sick.",
-      "Tongues": "The ability to speak to God in an unlearned, heavenly language for personal edification or public대언.",
-      "Interpretation of Tongues": "The ability to translate a message spoken in tongues so that the entire church is edified and comforted.",
-      "Intercession": "The ability to pray for others consistently and for extended periods, seeing frequent and specific answers.",
-      "Craftsmanship": "The ability to design, build, construct, or restore physical items or settings to be used in ministries."
+      "Leadership": "Leadership aids the body by leading and directing members to accomplish the goals and purposes of the church. Leadership motivates people to work together in unity toward common goals (Rom. 12:8).",
+      "Administration": "Persons with the gift of administration lead the body by steering others to remain on task. Administration enables the body to organize according to God-given purposes and long-term goals (1 Cor. 12:28).",
+      "Teaching": "Teaching is instructing members in the truths and doctrines of God's Word for the purposes of building up, unifying, and maturing the body (1 Cor. 12:28; Rom. 12:7; Eph. 4:11).",
+      "Knowledge": "The gift of knowledge manifests itself in teaching and training in discipleship. It is the God-given ability to learn, know, and explain the precious truths of God's Word. A word of knowledge is a Spirit-revealed truth (1 Cor. 12:28).",
+      "Wisdom": "Wisdom is the gift that discerns the work of the Holy Spirit in the body and applies His teachings and actions to the needs of the body (1 Cor. 12:28).",
+      "Prophecy": "The gift of prophecy is proclaiming the Word of God boldly. This builds up the body and leads to conviction of sin. Prophecy manifests itself in preaching and teaching (1 Cor. 12:10; Rom. 12:6).",
+      "Discernment": "Discernment aids the body by recognizing the true intentions of those within or related to the body. Discernment tests the message and actions of others for the protection and well-being of the body (1 Cor. 12:10).",
+      "Exhortation": "Possessors of this gift encourage members to be involved in and enthusiastic about the work of the Lord. Members with this gift are good counselors and motivate others to service. Exhortation exhibits itself in preaching, teaching, and ministry (Rom. 12:8).",
+      "Shepherding": "The gift of shepherding is manifested in people who look out for the spiritual welfare of others. Although pastors, like shepherds, do care for members of the church, this gift is not limited to a pastor or staff member (Eph. 4:11).",
+      "Pastor": "The gift of shepherding is manifested in people who look out for the spiritual welfare of others. Although pastors, like shepherds, do care for members of the church, this gift is not limited to a pastor or staff member (Eph. 4:11).",
+      "Faith": "Faith trusts God to work beyond the human capabilities of the people. Believers with this gift encourage others to trust in God in the face of apparently insurmountable odds (1 Cor. 12:9).",
+      "Evangelism": "God gifts his church with evangelists to lead others to Christ effectively and enthusiastically. This gift builds up the body by adding new members to its fellowship (Eph. 4:11).",
+      "Evangelist": "God gifts his church with evangelists to lead others to Christ effectively and enthusiastically. This gift builds up the body by adding new members to its fellowship (Eph. 4:11).",
+      "Apostleship": "The church sends apostles from the body to plant churches or be missionaries. Apostles motivate the body to look beyond its walls in order to carry out the Great Commission (1 Cor. 12:28; Eph. 4:11).",
+      "Missionary": "The church sends apostles from the body to plant churches or be missionaries. Apostles motivate the body to look beyond its walls in order to carry out the Great Commission (1 Cor. 12:28; Eph. 4:11).",
+      "Service/Helps": "Those with the gift of service/helps recognize practical needs in the body and joyfully give assistance to meeting those needs. Christians with this gift do not mind working behind the scenes (1 Cor. 12:28; Rom. 12:7).",
+      "Helps": "Those with the gift of service/helps recognize practical needs in the body and joyfully give assistance to meeting those needs. Christians with this gift do not mind working behind the scenes (1 Cor. 12:28; Rom. 12:7).",
+      "Service": "Those with the gift of service/helps recognize practical needs in the body and joyfully give assistance to meeting those needs. Christians with this gift do not mind working behind the scenes (1 Cor. 12:28; Rom. 12:7).",
+      "Serving": "Those with the gift of service/helps recognize practical needs in the body and joyfully give assistance to meeting those needs. Christians with this gift do not mind working behind the scenes (1 Cor. 12:28; Rom. 12:7).",
+      "Mercy": "Cheerful acts of compassion characterize those with the gift of mercy. Persons with this gift aid the body by empathizing with hurting members. They keep the body healthy and unified by keeping others aware of the needs within the church (Rom. 12:8).",
+      "Giving": "Members with the gift of giving give freely and joyfully to the work and mission of the body. Cheerfulness and liberality are characteristics of individuals with this gift (Rom. 12:8).",
+      "Hospitality": "Those with this gift make visitors, guests, and strangers feel at ease. They often use their home to entertain guests. Persons with this gift integrate new members into the body (1 Pet. 4:9).",
+      "Miracles": "The ability to serve as a channel for God to perform supernatural events that demonstrate His power and glory. Through miracles, unbelievers witness the living God (1 Cor. 12:10).",
+      "Healing": "The ability to serve as an instrument for God to restore physical, mental, or emotional health through prayer in the name of Jesus (1 Cor. 12:9).",
+      "Tongues": "The ability to speak to God in an unlearned, heavenly language for personal edification or public proclamation. Used together with interpretation for the edification of the church (1 Cor. 12:10).",
+      "Interpretation of Tongues": "The ability to translate a message spoken in tongues so that the entire church is edified, comforted, and built up (1 Cor. 12:10).",
+      "Intercession": "The ability to pray for others consistently and for extended periods of time, seeing frequent and specific answers to prayer.",
+      "Craftsmanship": "The ability to design, build, construct, or restore physical items or settings to be used in ministries for the glory of God."
     }
   }
 };
